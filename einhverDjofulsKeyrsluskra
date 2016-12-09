@@ -24,8 +24,8 @@ echo "GIT_COMMIT=$(echo $GIT_COMMIT)" > .env
 
 #Copy files securely over to the EC2 machine hosted on AWS
 #scp -o StrictHostKeyChecking=no -i "./ec2_instance/Credentials/gvendur88Admin-key-pair-euwest1.pem" ./{docker-compose.yaml,.env} ec2-user@172-31-16-19:~/
-scp -o StrictHostKeyChecking=no -i "./ec2_instance/Credentials/gvendur88Admin-key-pair-euwest1.pem" ./docker-compose.yaml ec2-user@35.163.249.251:~/docker-compose.yaml
-scp -o StrictHostKeyChecking=no -i "./ec2_instance/Credentials/gvendur88Admin-key-pair-euwest1.pem" ./.env ec2-user@35.163.249.251:~/.env
+#scp -o StrictHostKeyChecking=no -i "./ec2_instance/Credentials/gvendur88Admin-key-pair-euwest1.pem" ./docker-compose.yaml ec2-user@35.163.249.251:~/docker-compose.yaml
+#scp -o StrictHostKeyChecking=no -i "./ec2_instance/Credentials/gvendur88Admin-key-pair-euwest1.pem" ./.env ec2-user@35.163.249.251:~/.env
 
 cd ./client
 npm install
