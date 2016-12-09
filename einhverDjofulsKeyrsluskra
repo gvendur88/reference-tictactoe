@@ -83,7 +83,7 @@ if [[ $rc != 0 ]] ; then
 	exit $rc
 fi
 
-
+docker login --username gvendur88 --password fakepassword
 
 #Push the docker image onto the docker hub.
 docker push gvendur88/tictactoe:$GIT_COMMIT
