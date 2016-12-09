@@ -7,7 +7,7 @@ rm -rf ./build
 #mkdir dist/public
 #touch dist/githash.txt
 
-#Testing git commit comment!!!!!!1!!one!!!11!!!eleven!!onehundredandeleven!
+#Testing git commit comment!!!!!!1!!one!!!11!!!eleven!!onehundredandeleven!!!!
 
 #If a git commit hash with the same value is found then this if sentence won't be launched.
 #Creates a GIT_COMMIT and a GIT_URL from the repository on github.
