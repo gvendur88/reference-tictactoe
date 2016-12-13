@@ -13,7 +13,7 @@ Given | When | Then
 ### Trying to join a full game
 Given | When | Then
 --- | --- | ---
-*Game joined* | *Join game* | *Game full event triggered*
+*Game joined* | *Join game* | *Game full, event triggered*
 
 ------
 
