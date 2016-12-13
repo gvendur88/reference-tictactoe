@@ -1,4 +1,4 @@
-![alt text](https://github.com/gvendur88/reference-tictactoe/blob/master/atomlogo.png)
+![alt text](https://github.com/gvendur88/reference-tictactoe/blob/master/atomlogo.png) ![alt text](https://github.com/gvendur88/reference-tictactoe/blob/master/nodejslogo.png)
 
 # Test Examples!
 
