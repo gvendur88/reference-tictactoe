@@ -25,11 +25,52 @@ Given | When | Then
 
 
 ## Place move
+### Legal move by O
 Given | When | Then
 --- | --- | ---
-*Game created, game joined* | *PlaceMove[0,0,X]* | *MovePlaced[0,0, X]*
+*Game created, game joined* | *PlaceMove[0,0,O]* | *MovePlaced[0,0, O]*
 
 ------
+
+### Illegal move by X
+Given | When | Then
+--- | --- | ---
+*Game created, game joined, MovePlace[0,0,O]* | *PlaceMove[0,0,X]* | *MovePlaced[0,0, X]*
+
+------
+
+### Legal move by X
+Given | When | Then
+--- | --- | ---
+*Game created, game joined, MovePlaced[0,0,O]* | *PlaceMove[0,X,0]* | *MovePlaced[0,X,O]*
+
+------
+
+### Hehe 2
+Given | When | Then
+--- | --- | ---
+** | ** | **
+
+------
+
+### Hehe 3
+Given | When | Then
+--- | --- | ---
+** | ** | **
+
+------
+
+### Hehe 4
+Given | When | Then
+--- | --- | ---
+** | ** | **
+
+------
+
+
+
+
+
 
 Given | When | Then
 --- | --- | ---
