@@ -72,13 +72,38 @@ module.exports = function (injected) {
 			}
 		}
 
+		function isGameWon(event) {
+			/*if((boardState[0, 1, 2] || boardState[3, 4, 5] || boardState[6, 7, 8] || boardState[0, 3, 6] || boardState[1, 4, 7] || boardState[2, 5, 8] || boardState[0, 4, 8] || boardState[2, 4, 6]) === (['X', 'X', 'X'] || ['O', 'O', 'O'])) {
+				console.log("I'm true!");
+				return true;
+			} else {
+				console.log("I'm false!");
+				return false;
+			}*/
+			if((boardState[0] === boardState[1]) && (boardState[0] === boardState[2]) && (boardState[0] === ('X' || 'O'))
+					|| (boardState[3] === boardState[4]) && (boardState[3] === boardState[5]) && (boardState[3] === ('X' || 'O'))
+					|| (boardState[6] === boardState[7]) && (boardState[6] === boardState[8]) && (boardState[6] === ('X' || 'O'))
+					|| (boardState[0] === boardState[3]) && (boardState[0] === boardState[6]) && (boardState[0] === ('X' || 'O'))
+					|| (boardState[1] === boardState[4]) && (boardState[1] === boardState[7]) && (boardState[1] === ('X' || 'O'))
+					|| (boardState[2] === boardState[5]) && (boardState[2] === boardState[8]) && (boardState[2] === ('X' || 'O'))
+					|| (boardState[0] === boardState[4]) && (boardState[0] === boardState[8]) && (boardState[0] === ('X' || 'O'))
+					|| (boardState[2] === boardState[4]) && (boardState[2] === boardState[6]) && (boardState[2] === ('X' || 'O'))) {
+				console.log("I'm True!");
+				return true;
+			} else {
+				console.log("I'm False!");
+				return false;
+			}
+		}
+
 		processEvents(history);
 
 		return {	
 			gameFull: gameFull,
 			processEvents: processEvents,
 			cellOccupied: cellOccupied,
-			wrongPlayerTurn: wrongPlayerTurn
+			wrongPlayerTurn: wrongPlayerTurn,
+			isGameWon: isGameWon
 		}
 	};
 };

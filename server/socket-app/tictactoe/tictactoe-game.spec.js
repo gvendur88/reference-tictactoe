@@ -234,6 +234,71 @@ describe('Place move in game command', () => {
 		}];
 	});
 
+	it('should emit game won if the game was won', () => {
+		given = [{
+			type: "GameCreated",
+			user: { userName: "TheGuy" },
+			name: "TheFirstGame",
+			timeStamp: "2014-12-02T11:29:29"
+		}, {
+			type: "GameJoined",
+			user: { userName: "Gummi" },
+			name: "TheFirstGame",
+			timeStamp: "2014-12-02T11:29:29",
+			side:'O'
+		}, {
+			type: "MovePlaced",
+			user: { userName: "TheGuy" },
+			name: "TheFirstGame",
+			timeStamp: "2014-12-02T11:31:29",
+			side: 'X',
+			cellNumber: 2
+		}, {
+			type: "MovePlaced",
+			user: { userName: "Gummi" },
+			name: "TheFirstGame",
+			timeStamp: "2014-12-02T11:32:29",
+			side: 'O',
+			cellNumber: 4
+		}, {
+			type: "MovePlaced",
+			user: { userName: "TheGuy" },
+			name: "TheFirstGame",
+			timeStamp: "2014-12-02T11:33:29",
+			side: 'X',
+			cellNumber: 0
+		}, {
+			type: "MovePlaced",
+			user: { userName: "Gummi" },
+			name: "TheFirstGame",
+			timeStamp: "2014-12-02T11:34:29",
+			side: 'O',
+			cellNumber: 3
+		}];
+		when = {
+			type: "PlaceMove",
+			user: { userName: "TheGuy" },
+			name: "TheFirstGame",
+			timeStamp: "2014-12-02T11:35:29",
+			side: 'X',
+			cellNumber: 1
+		};
+		then = [{
+			type: "MovePlaced",
+			user: { userName: "TheGuy" },
+			name: "TheFirstGame",
+			timeStamp: "2014-12-02T11:35:29",
+			side:'X',
+			cellNumber: 1
+		}, {
+			type: "GameWon",
+			user: { userName: "TheGuy" },
+			name: "TheFirstGame",
+			timeStamp: "2014-12-02T11:35:29",
+			side:'X'
+		}];
+	});
+
 });
 
 

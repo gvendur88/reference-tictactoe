@@ -82,8 +82,19 @@ module.exports = function(injected){
 
 						gameState.processEvents(events);
 
+						if(gameState.isGameWon(cmd)) {
+							events.push({
+								gameId: cmd.gameId,
+								type: "GameWon",
+								user: cmd.user,
+								name: cmd.name,
+								timeStamp: cmd.timeStamp,
+								side: cmd.side
+							});
+						}
+
 						// Check here for conditions which may warrant additional events to be emitted.
-						//eventHandler(events);
+						eventHandler(events);
 					}
 				};
 
