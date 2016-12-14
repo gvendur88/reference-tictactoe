@@ -45,7 +45,7 @@ module.exports = function(injected){
 						if(gameState.wrongPlayerTurn(cmd)) {
 							eventHandler([{
 								gameId: cmd.gameId,
-								type: "IllegalMove",
+								type: "NotYourMove",
 								user: cmd.user,
 								name: cmd.name,
 								timeStamp: cmd.timeStamp,
