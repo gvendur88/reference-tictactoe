@@ -1,132 +1,88 @@
-var should = require('should');
-var _ = require('lodash');
+'use strict'
 
-var TictactoeState = require('./tictactoe-state')(inject({}));
+let should = require('should');
+let _ = require('lodash');
 
-var tictactoe = require('./tictactoe-handler')(inject({
-    TictactoeState
-}));
+let TictactoeState = require('./tictactoe-state')(inject({}));
 
-var createEvent = {
-    type: "GameCreated",
-    user: {
-        userName: "TheGuy"
-    },
-    name: "TheFirstGame",
-    timeStamp: "2014-12-02T11:29:29"
-};
+let tictactoe = require('./tictactoe-handler')(inject({ TictactoeState }));
 
-var joinEvent = {
-    type: "GameJoined",
-    user: {
-        userName: "Gummi"
-    },
-    name: "TheFirstGame",
-    timeStamp: "2014-12-02T11:29:29"
-};
+describe('create game command', () => {
 
+    let given, when, then;
 
-describe('create game command', function() {
-
-
-    var given, when, then;
-
-    beforeEach(function(){
-        given=undefined;
-        when=undefined;
-        then=undefined;
-    });
-
-    afterEach(function () {
-        tictactoe(given).executeCommand(when, function(actualEvents){
-            should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
-        });
-    });
-
-
-    it('should emit game created event', function(){
-
-        given = [];
-        when =
-        {
-            id:"123987",
-            type: "CreateGame",
-            user: {
-                userName: "TheGuy"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:29:29"
-        };
-        then = [
-            {
-                type: "GameCreated",
-                user: {
-                    userName: "TheGuy"
-                },
-                name: "TheFirstGame",
-                timeStamp: "2014-12-02T11:29:29",
-                side:'X'
-            }
-        ];
-
-    })
-});
-
-
-describe('join game command', function () {
-
-
-    var given, when, then;
-
-    beforeEach(function () {
+    beforeEach(() => {
         given = undefined;
         when = undefined;
         then = undefined;
     });
 
-    afterEach(function () {
-        tictactoe(given).executeCommand(when, function (actualEvents) {
+    afterEach(() => {
+        tictactoe(given).executeCommand(when, (actualEvents) => {
             should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
         });
     });
 
 
-    it('should emit game joined event...', function () {
-
-        given = [{
-            type: "GameCreated",
-            user: {
-                userName: "TheGuy"
-            },
-            name: "TheFirstGame",
-            timeStamp: "2014-12-02T11:29:29"
-        }
-        ];
-        when =
-        {
-            type: "JoinGame",
-            user: {
-                userName: "Gummi"
-            },
+    it('should emit game created event', () =>{
+        given = [];
+        when = {
+            id:"123987",
+            type: "CreateGame",
+            user: { userName: "TheGuy" },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         };
-        then = [
-            {
-                type: "GameJoined",
-                user: {
-                    userName: "Gummi"
-                },
-                name: "TheFirstGame",
-                timeStamp: "2014-12-02T11:29:29",
-                side:'O'
-            }
-        ];
+        then = [{
+            type: "GameCreated",
+            user: { userName: "TheGuy" },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29",
+            side:'X'
+        }];
+    })
+});
 
+
+describe('join game command', () => {
+
+    let given, when, then;
+
+    beforeEach(() => {
+        given = undefined;
+        when = undefined;
+        then = undefined;
     });
 
-    fit('should emit FullGameJoinAttempted event when game full..implement this', function () {
+    afterEach(() => {
+        tictactoe(given).executeCommand(when, (actualEvents) => {
+            should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+        });
+    });
 
+    it('should emit game joined event...', () => {
+        given = [{
+            type: "GameCreated",
+            user: { userName: "TheGuy" },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        }];
+        when = {
+            type: "JoinGame",
+            user: { userName: "Gummi" },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        };
+        then = [{
+            type: "GameJoined",
+            user: { userName: "Gummi" },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29",
+            side:'O'
+        }];
+    });
+
+    it('Should emit FullGameJoinAttempted event when game full', () => {
 				given = [{
             type: "GameCreated",
             user: { userName: "TheGuy" },
