@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="Place move in game command" timestamp="2016-12-16T15:15:10" hostname="localhost" time="0.015" errors="0" tests="6" skipped="0" disabled="0" failures="0">
+  <testcase classname="Place move in game command" name="should emit move placed on first move" time="0.002" />
+  <testcase classname="Place move in game command" name="should emit an illegal move" time="0.001" />
+  <testcase classname="Place move in game command" name="should emit not your move if trying to make a move out of turn" time="0.003" />
+  <testcase classname="Place move in game command" name="should emit game won if the game was won" time="0.002" />
+  <testcase classname="Place move in game command" name="should not emit game draw if game was won on last move" time="0.002" />
+  <testcase classname="Place move in game command" name="should emit game draw if neither wins" time="0.004" />
+ </testsuite>
+</testsuites>
