@@ -3,6 +3,7 @@
 # Test Examples!
 
 ## Create Game Command
+#### Trying to create a game
 Given | When | Then
 --- | --- | ---
  | *Create game* | *Game created event triggered*
@@ -25,49 +26,45 @@ Given | When | Then
 
 
 ## Place Move Command
-#### Legal move by O
+#### Legal move by X
 Given | When | Then
 --- | --- | ---
-*Game created, game joined* | *PlaceMove[0.0,0.0,0.O]* | *MovePlaced[0.0,0.0,0.O]*
+*Game created, Game joined* | *Place move X in pos 2* | *Move placed X in pos 2*
 
 ------
 
-#### Illegal move by X
+#### Illegal move by O
 Given | When | Then
 --- | --- | ---
-*Game created, game joined, MovePlaced[0.0,0.0,0.O]* | *PlaceMove[0.0,0.0,0.X]* | *IllegalMove event triggered*
+*Game created, Game joined, Move placed X in pos 2* | *Place move O in pos 2* | *IllegalMove event triggered*
 
 ------
 
 ### Try to place move when it's not X's turn
 Given | When | Then
 --- | --- | ---
-*MovePlaced[0.0,0.0,0.O]* | *PlaceMove[0.0,0.O,0.O]* | *NotYourMove event triggered*
+*Game created, Game joined, Move placed X in pos 2* | *Place move X in pos 0* | *NotYourMove event triggered*
 
 ------
 
-#### Game won by O
+#### Game won by X
 Given | When | Then
 --- | --- | ---
-*MovePlaced[0.0,1.O,2.O]* | *PlaceMove[0.O,1.O,2.O]* | *GameWon event triggered*
+*Game created, Game joined, Move placed in board [X, X, null, O, O]* | *Place move X in pos 1* | *GameWon event triggered*
 
 ------
 
-#### Hehe 4
+#### Game won on last move, Game draw not triggered
 Given | When | Then
 --- | --- | ---
-** | ** | **
+*Game created, Game joined, Move placed in board [X, O, X, O, O, X, O, X, null]* | *Place move X in pos 8* | *GameWon event triggered*
 
 ------
 
-
-
-
-
-
+#### Game draw
 Given | When | Then
 --- | --- | ---
-** | ** | **
+*Game created, Game joined, Move placed in board [X, O, X, O, O, X, null, O, X]* | *Place move X in pos 6* | *GameDraw event triggered*
 
 ## Here I end!
 
