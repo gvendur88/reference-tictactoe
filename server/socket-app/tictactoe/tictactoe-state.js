@@ -11,10 +11,6 @@ module.exports = (injected) => {
 		let turnsPlayed = 0;
 
 		function processEvent(event) {
-			console.log(event.type);
-			console.log(event.user);
-			console.log(event.side);
-			console.log(event.cellNumber);
 			if(event.type === "GameJoined") {
 				gamefull = true;
 			}
