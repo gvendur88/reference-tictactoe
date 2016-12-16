@@ -1,15 +1,16 @@
+'use strict'
 
-module.exports = function(injected){
-	var TictactoeState = injected('TictactoeState');
+module.exports = (injected) => {
+	const TictactoeState = injected('TictactoeState');
 
-	return function(history){
+	return (history) => {
 
-		var gameState = TictactoeState(history);
+		let gameState = TictactoeState(history);
 
 		return {
-			executeCommand: function(cmd, eventHandler){
-				var cmdHandlers = {
-					"CreateGame": function (cmd) {
+			executeCommand: (cmd, eventHandler) => {
+				let cmdHandlers = {
+					"CreateGame": (cmd) => {
 						eventHandler([{
 							gameId: cmd.gameId,
 							type: "GameCreated",
@@ -20,7 +21,7 @@ module.exports = function(injected){
 						}]);
 
 					},
-					"JoinGame": function (cmd) {
+					"JoinGame": (cmd) => {
 						if(gameState.gameFull()){
 							eventHandler( [{
 								gameId: cmd.gameId,
@@ -41,7 +42,7 @@ module.exports = function(injected){
 							side: 'O'
 						}]);
 					},
-					"PlaceMove": function(cmd){
+					"PlaceMove": (cmd) => {
 						if(gameState.wrongPlayerTurn(cmd)) {
 							eventHandler([{
 								gameId: cmd.gameId,
@@ -78,8 +79,6 @@ module.exports = function(injected){
 							cellNumber: cmd.cellNumber
 						}];
 
-						// Check here for conditions which prevent command from altering state
-
 						gameState.processEvents(events);
 
 						if(gameState.isGameWon(cmd)) {
@@ -93,7 +92,17 @@ module.exports = function(injected){
 							});
 						}
 
-						// Check here for conditions which may warrant additional events to be emitted.
+						if(gameState.isGameDraw() && !gameState.isGameWon(cmd)) {
+							events.push({
+								gameId: cmd.gameId,
+								type: "GameDraw",
+								user: cmd.user,
+								name: cmd.name,
+								timeStamp: cmd.timeStamp,
+								side: cmd.side
+							});
+						}
+
 						eventHandler(events);
 					}
 				};
