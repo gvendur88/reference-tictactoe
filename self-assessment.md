@@ -4,9 +4,12 @@
 1. Game URL (AWS) = 35.163.249.251:8080
 
 
+
 ## Scripts
 
-Outline what script files you created and the purpose of each file. Each file should be commented. This could be
+Outline what script files you created and the purpose of each file. Each file should be commented.
+
+All these scripts are located in the root directory of the project.
 
 - einhverDjofulsKeyrsluskra
 
@@ -45,7 +48,7 @@ Outline what tests you created.
   8. Game won on last move
   9. Game draw
 
-  All the documentation for the tests is in coverage in the root folder.
+  All the xml documentation for the tests is in coverage in the root folder.
 
 - Is the game playable?
 
@@ -93,11 +96,12 @@ Did you create a data migration.
   access my github when running the commit-stage.
 
 
+
 ## Monitoring
 
 Did you do any monitoring?
 
-- URL to monitoring tool. Must be open or include username and pass.
+- No code coverage monitored or anything.
 
 
 
