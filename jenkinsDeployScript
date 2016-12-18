@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copies the docker-compose.yaml file over to the ec2 server.
 scp -o StrictHostKeyChecking=no -i "/home/ubuntu/gvendur88Admin-key-pair-euwest1.pem" /var/lib/jenkins/workspace/commit-stage/docker-compose.yaml ec2-user@35.163.249.251:docker-compose.yaml
+# Copies the .env file over to the ec2 server.
 scp -o StrictHostKeyChecking=no -i "/home/ubuntu/gvendur88Admin-key-pair-euwest1.pem" /var/lib/jenkins/workspace/commit-stage/.env ec2-user@35.163.249.251:.env
+# Runs docker-compose up -d as a deamon on the server so it doesn't hang.
 ssh -i /home/ubuntu/gvendur88Admin-key-pair-euwest1.pem ec2-user@35.163.249.251 docker-compose up -d

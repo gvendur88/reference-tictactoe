@@ -1,15 +1,10 @@
 #!/bin/bash
 
 echo Cleaning...
-#Removes the dist folder so we can create a fresh one later.
+# Removes the build folder so we can create a fresh one later.
 rm -rf ./build
 
-#mkdir dist/public
-#touch dist/githash.txt
-
-#Testing git commit comment!!!!1!!one!!11!!eleven!!onehundredandeleven!!!!!!
-
-#If a git commit hash with the same value is found then this if sentence won't be launched.
+# If a git commit hash with the same value is found then this if sentence won't be launched.
 #Creates a GIT_COMMIT and a GIT_URL from the repository on github.
 if [ -z "$GIT_COMMIT" ]; then
 	export GIT_COMMIT=$(git rev-parse HEAD)
@@ -22,23 +17,18 @@ export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 #Puts the GIT_COMMIT into a .env file so the docker-compose.yaml can read this environmantle variable.
 echo "GIT_COMMIT=$(echo $GIT_COMMIT)" > .env
 
-#Copy files securely over to the EC2 machine hosted on AWS
-#scp -o StrictHostKeyChecking=no -i "./ec2_instance/Credentials/gvendur88Admin-key-pair-euwest1.pem" ./{docker-compose.yaml,.env} ec2-user@172-31-16-19:~/
-#scp -o StrictHostKeyChecking=no -i "./ec2_instance/Credentials/gvendur88Admin-key-pair-euwest1.pem" ./docker-compose.yaml ec2-user@35.163.249.251:~/docker-compose.yaml
-#scp -o StrictHostKeyChecking=no -i "./ec2_instance/Credentials/gvendur88Admin-key-pair-euwest1.pem" ./.env ec2-user@35.163.249.251:~/.env
-
-#scp -o StrictHostKeyChecking=no {./docker-compose.yaml,./.env} ubuntu@82.221.49.145:~/
-
-
+# Navigates into the client folder and runs npm install to install all dependencies.
 cd ./client
 npm install
+# Navigates out of the client folder and runs npm install in the root folder to install dependencies.
 cd ..
 npm install
 
 echo Building app
-#Creates the build directory.
+# Creates the build directory.
 npm run build
 
+# Navigates into the server folder to run the tests for tictactoe.
 cd server
 CI=true npm run test
 cd ..
@@ -49,14 +39,14 @@ if [[ $rc != 0 ]] ; then
 	exit $rc
 fi
 
-#Create a githash.txt file in the dist folder and put the GIT_COMMIT hash there.
+# Create a githash.txt file in the build folder and put the GIT_COMMIT hash there.
 cat > ./build/githash.txt <<_EOF_
 $GIT_COMMIT
 _EOF_
 
-#Create the public directory inside the dist folder.
+# Create the public directory inside the build folder.
 mkdir ./build/public
-#Creates a version.html file inside the public folder for the html tags.
+# Creates a version.html file inside the public folder for the html tags.
 cat > ./build/public/version.html << _EOF_
 <!doctype html>
 <head>
@@ -70,18 +60,18 @@ cat > ./build/public/version.html << _EOF_
 </body>
 _EOF_
 
-#Copies a few files into the build folder for the Docker image.
+# Copies a few files into the build folder for the Docker image.
 cp ./Dockerfile ./build/
 cp package.json ./build/
 cp runNodeJS ./build/
 cp docker-compose.yaml ./build/
 
-#Station ourselves inside the build folder
+# Navigate into the build folder
 cd build
 
 echo Building docker image
 
-#Build the docker image from here with the Dockerfile.
+# Build the docker image from here with the Dockerfile.
 docker build -t gvendur88/tictactoe:$GIT_COMMIT .
 
 rc=$?
@@ -90,9 +80,10 @@ if [[ $rc != 0 ]] ; then
 	exit $rc
 fi
 
+# Temporary login information for the docker hub.
 docker login --username gvendur88 --password fakepassword
 
-#Push the docker image onto the docker hub.
+# Pushes the docker image onto the docker hub.
 docker push gvendur88/tictactoe:$GIT_COMMIT
 rc=$?
 if [[ $rc != 0 ]] ; then
